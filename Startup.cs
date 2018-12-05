@@ -37,6 +37,7 @@ namespace cancel
                 options.Filters.Add<OperationCancelledExceptionFilter>();
             }).SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddMvc();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -64,6 +65,30 @@ namespace cancel
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            // middleware for server socket events
+            // this works on its own without the need for MVC.
+            /* app.Use(async (context, next) =>
+            {
+                if (context.Request.Path.ToString().Equals("/sse1"))
+                {
+                    var response = context.Response;
+                    response.Headers.Add("Content-Type", "text/event-stream");
+
+                    for (var i = 0; true; ++i)
+                    {
+                        await response
+                            .WriteAsync($"data: Middleware {i} at {DateTime.Now}\r\r");
+
+                        response.Body.Flush();
+
+                        await Task.Delay(5 * 1000);
+                    }
+                }
+
+                await next.Invoke();
+            });
+            */
         }
     }
 }

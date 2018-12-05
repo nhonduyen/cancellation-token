@@ -1,17 +1,14 @@
 ﻿@{
-    ViewData["Title"] = "Contact";
+    ViewData["Title"] = "SSE Demo";
+}
+@section Scripts
+{
+    <script src='~/js/sse.js' defer></script>
 }
 <h2>@ViewData["Title"]</h2>
-<h3>@ViewData["Message"]</h3>
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
-
-<address>
-    <strong>Support:</strong> <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+<span id="sseResult"></span>
+<span id="fileContent"></span>
+<hr>
+<button class="btn btn-info" id="btnClosetime">Close Time Stream</button>
+<button id="btnClosefile" class="btn btn-danger">Close File Stream</button>
