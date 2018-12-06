@@ -35,9 +35,9 @@ namespace cancel.Controllers
             var response = _httpContextAccessor.HttpContext.Response;
             response.Headers.Add("Content-Type", "text/event-stream");
             response.StatusCode = 200;
-            var fileContent =  System.IO.File.ReadAllTextAsync(@"data.txt");
+            var fileContent = await System.IO.File.ReadAllTextAsync(@"data.txt");
            
-            await response.WriteAsync($"data: {fileContent.Result}\r\r", cancellationToken);
+            await response.WriteAsync($"data: {fileContent}\r\r", cancellationToken);
             response.Body.Flush();
         }
     }
