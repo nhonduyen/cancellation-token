@@ -16,11 +16,11 @@ namespace cancel.Controllers
         {
             return View();
         }
-
+        [ResponseCache(CacheProfileName = "Default")]
         public IActionResult About()
         {
-            ViewData["Message"] = "Your application description page.";
-
+            ViewData["Message"] = "Cache data.";
+            ViewData["Cache"] = $"{Guid.NewGuid()} {DateTime.Now} Expires 30 second {DateTime.Now.AddSeconds(30)} ";
             return View();
         }
 

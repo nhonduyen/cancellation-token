@@ -36,12 +36,26 @@ namespace cancel
             services.AddMvc(options =>
             {
                 options.Filters.Add<OperationCancelledExceptionFilter>();
+                options.CacheProfiles.Add("Default",
+                new CacheProfile()
+                {
+                    Duration = 30,
+                    VaryByHeader = "User-Agent",
+                    Location = ResponseCacheLocation.Client
+                });
+                options.CacheProfiles.Add("Never",
+                new CacheProfile()
+                {
+                    NoStore = true,
+                    Location = ResponseCacheLocation.None
+                });
             }).SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddMvc();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddTransient<ITransisionService, SomeService>();
             services.AddScoped<IScopedService, SomeService>();
             services.AddSingleton<ISingletonService, SomeService>();
+            services.AddMemoryCache();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
