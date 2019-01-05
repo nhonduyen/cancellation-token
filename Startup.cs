@@ -56,6 +56,8 @@ namespace cancel
             services.AddScoped<IScopedService, SomeService>();
             services.AddSingleton<ISingletonService, SomeService>();
             services.AddMemoryCache();
+            // add hosted service 
+            services.AddHostedService<TimedHostedService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

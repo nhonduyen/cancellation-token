@@ -7,7 +7,7 @@ if (typeof (EventSource)) {
         document.getElementById("sseResult").innerHTML = event.data;
         console.log(event.data);
     }
-   
+
     source.onerror = (err) => {
         //console.log(err);
     };
@@ -21,12 +21,12 @@ if (typeof (EventSource)) {
         document.getElementById("fileContent").innerHTML = event.data;
         console.log("File " + event.data);
     }
-    document.getElementById("btnClosetime").addEventListener("click", function (){
+    document.getElementById("btnClosetime").addEventListener("click", function () {
         source.close();
         document.getElementById("sseResult").innerHTML = "Connection closed";
         console.log("Connection closed");
     });
-    document.getElementById("btnClosefile").addEventListener("click", function (){
+    document.getElementById("btnClosefile").addEventListener("click", function () {
         sourceFile.close();
         document.getElementById("fileContent").innerHTML = "Connection closed";
         console.log("Connection closed");
@@ -34,3 +34,14 @@ if (typeof (EventSource)) {
 } else {
     console.log("Not Support SSE");
 }
+
+document.getElementById("btnStopService").addEventListener("click", function () {
+    const xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            console.log("Stoped hosted service");
+        }
+    };
+    xhttp.open("GET", "getcustomer.php?q=" + str, true);
+    xhttp.send();
+});

@@ -40,5 +40,6 @@ namespace cancel.Controllers
             await response.WriteAsync($"data: {fileContent}\r\r", cancellationToken);
             response.Body.Flush();
         }
+
     }
 }
